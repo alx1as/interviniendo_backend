@@ -18,7 +18,6 @@ from modelos.comentario import Comentario
 
 # Importar rutas DESPUÉS de modelos
 from rutas.poemas import poemas_bp
-from rutas.cadaver import cadaver_bp
 from rutas.usuarios import usuarios_bp
 from rutas.comentarios import comentarios_bp
 from rutas.cadaver_db import cadaver_db_bp
@@ -26,7 +25,6 @@ from rutas.cadaver_db import cadaver_db_bp
 # Registrar blueprints
 app.register_blueprint(cadaver_db_bp, url_prefix="/api")
 app.register_blueprint(poemas_bp, url_prefix="/api")
-app.register_blueprint(cadaver_bp, url_prefix="/api")
 app.register_blueprint(usuarios_bp, url_prefix="/api")
 app.register_blueprint(comentarios_bp, url_prefix="/api")
 
