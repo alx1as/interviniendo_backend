@@ -30,6 +30,29 @@ app.register_blueprint(cadaver_bp, url_prefix="/api")
 app.register_blueprint(usuarios_bp, url_prefix="/api")
 app.register_blueprint(comentarios_bp, url_prefix="/api")
 
+##receteo de base de datos de prueba
+# ─────────────────────────────────────────────
+# ENDPOINT ADMIN PARA RESETEAR TODA LA BASE
+# ─────────────────────────────────────────────
+from flask import request, jsonify
+
+@app.route("/api/admin/reset_db", methods=["POST"])
+def reset_db():
+    token = request.args.get("token")
+
+    # Cambiá este token por uno privado momentáneo
+    if token != "limpiar123":
+        return jsonify({"error": "no autorizado"}), 403
+
+    # Borrar todas las tablas
+    meta = db.metadata
+    for table in reversed(meta.sorted_tables):
+        db.session.execute(table.delete())
+
+    db.session.commit()
+
+    return jsonify({"ok": True, "msg": "Base vaciada correctamente"})
+
 # Crear tablas
 with app.app_context():
     db.create_all()
