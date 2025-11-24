@@ -16,7 +16,7 @@ def obtener():
 
 @cadaver_db_bp.post("/cadaver")
 def guardar():
-    data = request.json
+    data = request.get_json(force=True)
 
     # convertir dict a string JSON
     serializado = json.dumps(data, ensure_ascii=False)
